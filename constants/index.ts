@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export const sideBarLinks = [
     {
         label: 'Home',
@@ -25,3 +27,23 @@ export const sideBarLinks = [
         imgUrl: '/icons/add-room.svg'
     },
 ]
+
+export interface CardProps {
+    iconURL: string;
+    cardName: string;
+    cardDesc: string;
+    color: string;
+    handleClick?: () => void;
+}
+
+export interface MeetingModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    title: string;
+    handleClick: () => void;
+    className?: string;
+    buttonText?: string;
+    children?: ReactNode;
+    image?: string;
+    buttonIcon?: string;
+}
