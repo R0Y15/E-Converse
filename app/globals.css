@@ -82,6 +82,16 @@
   color: white;
 }
 
+.cl-button {
+  background: #252a41;
+  color: white;
+}
+
+.cl-badge {
+  color: white;
+  border: 1px solid #0E78F9;
+}
+
 .cl-userButtonPopoverActionButton {
   color: white;
 }
