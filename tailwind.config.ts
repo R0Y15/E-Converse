@@ -25,23 +25,23 @@ const config = {
           2: '#161925'
         },
         orange: {
-          1: '#FF742E'
+          1: '#FF6574'
         },
         purple: {
-          1: '#830EF9'
+          1: '#D151D4'
         },
         yellow: {
-          1: '#F9A90E'
+          1: '#F59B6E'
         },
         blue: {
-          1: '#0E78F9'
+          1: '#E134A4'
         },
         sky: {
-          1: '#C9DDFF'
+          1: '#801F81'
         }
       },
       backgroundImage: {
-        hero: "url('/images/hero-bg.png')",
+        hero: "url('/images/hero-bg.svg')",
       },
       keyframes: {
         "accordion-down": {
