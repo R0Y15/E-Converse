@@ -1,19 +1,65 @@
 'use client';
 
-import Image from 'next/image';
 import React, { useState } from 'react'
 import Card from './Card';
 import { useRouter } from 'next/navigation';
 import MeetingModal from './MeetingModal';
+import { useUser } from '@clerk/nextjs';
+import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
+import { useToast } from "@/components/ui/use-toast"
+
 
 const MeetingTypeList = () => {
 
-    const createMeeting = () => {
+    const { user } = useUser();
+    const { toast } = useToast()
+    const router = useRouter();
+    const client = useStreamVideoClient();
+    const [meetingState, setMeetingState] = useState<'isJoining' | 'isSchedule' | 'isInstant' | undefined>()
+    const [values, setValues] = useState({
+        DateTime: new Date(),
+        desc: '',
+        link: ''
+    })
+    const [callDetails, setCallDetails] = useState<Call>()
 
+    const createMeeting = async () => {
+        if (!client || !user) return;
+
+        try {
+
+            if(!values.DateTime) {
+                toast({ title: 'Please Select A Date & Time' })
+                return;
+            }
+            const meetID = crypto.randomUUID();
+            const call = client.call('default', meetID);
+
+            if (!call) throw new Error('Failed to create a meeting');
+            const startsAt = values.DateTime.toISOString() || new Date(Date.now()).toISOString();
+            const description = values.desc || 'Instant Meeting';
+
+            await call.getOrCreate({
+                data: {
+                    starts_at: startsAt,
+                    custom: {
+                        description
+                    }
+                }
+            })
+
+            setCallDetails(call);
+
+            if (!values.desc) {
+                router.push(`/meeting/${call.id}`);
+            }
+            toast({ title: 'Meeting Created' })
+
+        } catch (error) {
+            toast({ title: 'Failed to create a meeting' })
+        }
     }
 
-    const router = useRouter();
-    const [meetingState, setMeetingState] = useState<'isJoining' | 'isSchedule' | 'isInstant' | undefined>()
 
     return (
         <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
