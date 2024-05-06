@@ -51,3 +51,5 @@ export interface MeetingModalProps {
 export interface MeetingSetupProps {
     setupStatus: (value: boolean) => void;
 }
+
+export type CallLayoutTypes = 'speaker-left' | 'speaker-right' | 'grid' 
