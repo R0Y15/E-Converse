@@ -5,10 +5,12 @@ const Previous = () => {
   return (
     <section className='felx size-full flex-col gap-10 text-white'>
       <h1 className="text-3xl font-bold">
-        Previous
+        Previous Meetings
       </h1>
 
-      <CallList type='ended' />
+      <div className="relative my-5">
+        <CallList type='ended' />
+      </div>
     </section>
   )
 }

@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { Button } from './ui/button'
 
 
-const MeetingModal = ({ isOpen, onClose, title, className, buttonText, handleClick, children, image, buttonIcon }: MeetingModalProps) => {
+const MeetingModal = ({ isOpen, onClose, title, className, buttonText, handleClick, children, image, buttonIcon, btnHide }: MeetingModalProps) => {
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogContent className='flex w-full max-w-[520px] flex-col gap-6 border-none bg-dark-1 px-6 py-9 text-white'>
@@ -25,7 +25,7 @@ const MeetingModal = ({ isOpen, onClose, title, className, buttonText, handleCli
                     {children}
 
                     <Button
-                        className='bg-blue-1 focus-visible:ring-0 focus-visible:ring-offset-0'
+                        className={`bg-blue-1 focus-visible:ring-0 focus-visible:ring-offset-0 ${btnHide ? 'hidden' : ''}`}
                         onClick={handleClick}
                     >
                         {buttonIcon && (

@@ -1,6 +1,6 @@
 'use client';
 
-import { Call, CallRecording } from '@stream-io/video-react-sdk';
+import { Call, CallRecording, useCall } from '@stream-io/video-react-sdk';
 
 import Loader from './Loader';
 import { useGetCalls } from '@/hooks/useGetCalls';
@@ -14,6 +14,7 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
     const { toast } = useToast();
     const { Loading, endedcalls, upcomingcalls, callRecordings } = useGetCalls();
     const [recordings, setRecordings] = useState<CallRecording[]>([]);
+    const call = useCall();
 
     const getCalls = () => {
         switch (type) {
@@ -86,7 +87,7 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
                         title={
                             (meeting as Call).state?.custom?.description ||
                             (meeting as CallRecording).filename?.substring(0, 20) ||
-                            'No Description'
+                            'Personal Meeting Room'
                         }
                         date={
                             (meeting as Call).state?.startsAt?.toLocaleString() ||
@@ -104,6 +105,14 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
                             type === 'recordings'
                                 ? () => router.push(`${(meeting as CallRecording).url}`)
                                 : () => router.push(`/meeting/${(meeting as Call).id}`)
+                        }
+                        deleteMeeting={
+                            type === 'upcoming'
+                                ? () => {
+                                    call?.endCall();
+                                    toast({ title: 'Meeting deleted' });
+                                }
+                                : undefined
                         }
                     />
                 ))

@@ -8,18 +8,28 @@ import { useToast } from './ui/use-toast';
 import { MeetingCardProps } from '@/constants';
 
 
-const MeetingCard = ({ title, date, icon, isPreviousMeeting, buttonIcon1, buttonText, handleClick, link }: MeetingCardProps) => {
+const MeetingCard = ({ title, date, icon, isPreviousMeeting, buttonIcon1, buttonText, handleClick, link, deleteMeeting }: MeetingCardProps) => {
 
     const { toast } = useToast();
     return (
         <section className="flex min-h-[258px] w-full flex-col justify-between rounded-[14px] bg-dark-1 px-5 py-8 xl:max-w-[568px]">
             <article className='flex flex-col gap-5'>
-                <Image
-                    src={icon}
-                    alt='upcoming'
-                    width={28}
-                    height={28}
-                />
+                <div className='flex flex-row justify-between'>
+                    <Image
+                        src={icon}
+                        alt='upcoming'
+                        width={28}
+                        height={28}
+                    />
+                    <Image
+                        src='/icons/bin.svg'
+                        className={`invert cursor-pointer ${isPreviousMeeting ? 'hidden' : 'block'}`}
+                        alt='upcoming'
+                        width={35}
+                        height={35}
+                        onClick={deleteMeeting}
+                    />
+                </div>
                 <div className="flex justify-between">
                     <div className="flex flex-col gap-2">
                         <h1 className="text-2xl font-bold">

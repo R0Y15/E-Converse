@@ -40,12 +40,13 @@ export interface MeetingModalProps {
     isOpen: boolean;
     onClose: () => void;
     title: string;
-    handleClick: () => void;
+    handleClick?: () => void;
     className?: string;
     buttonText?: string;
     children?: ReactNode;
     image?: string;
     buttonIcon?: string;
+    btnHide?: boolean;
 }
 
 export interface MeetingSetupProps {
@@ -61,6 +62,7 @@ export interface MeetingCardProps {
     buttonIcon1?: string,
     buttonText?: string,
     handleClick?: () => void,
+    deleteMeeting?: () => void
 }
 
 export const avatarImages = [
