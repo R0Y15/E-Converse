@@ -1,9 +1,9 @@
 <h1 align='center'>
 E-Converse
 </h1>
-<h2 align='center'>
+<p align='center' style="font-size:1.5em; font-weight:bold;">
 “Connect Beyond Borders - Your Gateway to Global Conversations!” 🌐✨
-</h2>
+</p>
 
 E-Converse is a cutting-edge video conferencing platform designed for today’s dynamic work environment. With a focus on speed, security, and user-friendly features, E-Converse ensures a seamless virtual meeting experience.
 ##### View Deployment: https://e-converse.vercel.app
